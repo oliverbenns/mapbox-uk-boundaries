@@ -31,6 +31,7 @@ header {
   right: 0;
   background: rbga(255, 255, 255, 0.8);
   padding: 8px;
+  text-align: center;
 }
 
 header h1 {
