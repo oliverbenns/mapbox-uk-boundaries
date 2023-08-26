@@ -27,7 +27,6 @@ function App() {
       (async () => {
         const res = await fetch("./boundaries.geojson");
         const data = (await res.json()) as FeatureCollection<Polygon>;
-        console.log("data", data);
 
         // Data is in EPSG:27700 (British National Grid) format and Mapbox requires it in EPSG:4326.
         normalizeData(data);
@@ -41,29 +40,8 @@ function App() {
           data: data,
         });
 
-        // Add a new layer to visualize the polygon.
-        map.current.addLayer({
-          id: "boundaries_fill",
-          type: "fill",
-          source: "boundaries", // reference the data source
-          layout: {},
-          paint: {
-            "fill-color": "#0080ff", // blue color fill
-            "fill-opacity": 0.5,
-          },
-        });
-
-        // Add a black outline around the polygon.
-        map.current.addLayer({
-          id: "boundaries_line",
-          type: "line",
-          source: "boundaries",
-          layout: {},
-          paint: {
-            "line-color": "#000",
-            "line-width": 3,
-          },
-        });
+        addLayers(map.current);
+        addHoverListeners(map.current);
       })();
     });
   });
@@ -76,6 +54,67 @@ function App() {
     </div>
   );
 }
+
+const addLayers = (map: mapboxgl.Map) => {
+  map.addLayer({
+    id: "boundaries-fill",
+    type: "fill",
+    source: "boundaries",
+    layout: {},
+    paint: {
+      "fill-color": "#0080ff",
+      "fill-opacity": [
+        "case",
+        ["boolean", ["feature-state", "hover"], false],
+        1,
+        0.5,
+      ],
+    },
+  });
+
+  map.addLayer({
+    id: "boundaries-line",
+    type: "line",
+    source: "boundaries",
+    layout: {},
+    paint: {
+      "line-color": "#000",
+      "line-width": 1,
+    },
+  });
+};
+
+const addHoverListeners = (map: mapboxgl.Map) => {
+  let hoveredFeatureId: string | number | undefined;
+
+  map.on("mousemove", "boundaries-fill", (e) => {
+    if (!e.features || e.features.length === 0) {
+      return;
+    }
+
+    if (hoveredFeatureId !== undefined) {
+      map.setFeatureState(
+        { source: "boundaries", id: hoveredFeatureId },
+        { hover: false }
+      );
+    }
+    hoveredFeatureId = e.features[0].id;
+    map.setFeatureState(
+      { source: "boundaries", id: hoveredFeatureId },
+      { hover: true }
+    );
+  });
+
+  map.on("mouseleave", "boundaries-fill", () => {
+    if (hoveredFeatureId !== undefined) {
+      map.setFeatureState(
+        { source: "boundaries", id: hoveredFeatureId },
+        { hover: false }
+      );
+    }
+    hoveredFeatureId = undefined;
+  });
+};
 
 // Converts polygon boundary coordinates from EPSG:27700 to EPSG:4326.
 // NOTE: This mutates!!
