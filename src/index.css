@@ -19,3 +19,8 @@ main {
   height: 75vh;
   width: 75vw;
 }
+
+.mapboxgl-popup-content {
+  padding: 8px;
+  font-size: 10px;
+}
