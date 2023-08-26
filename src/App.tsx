@@ -24,7 +24,6 @@ function App() {
 
   return (
     <div>
-      <header></header>
       <main>
         <div ref={mapContainer} className="map" />
       </main>
