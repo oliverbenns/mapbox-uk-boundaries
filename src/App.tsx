@@ -74,6 +74,7 @@ function App() {
         <a
           href="https://github.com/oliverbenns/mapbox-uk-boundaries"
           target="_blank"
+          rel="noreferrer"
         >
           View on Github
         </a>
