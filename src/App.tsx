@@ -39,7 +39,7 @@ function App() {
       accessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
       style: "mapbox://styles/mapbox/light-v11",
       center: [-3.4735, 54.1171],
-      zoom: 4,
+      zoom: 4.5,
       projection: {
         name: "mercator",
       },
