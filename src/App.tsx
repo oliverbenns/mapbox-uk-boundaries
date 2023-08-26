@@ -80,7 +80,7 @@ function App() {
 // Does result in flash though on initial load.
 const removeLabels = (map: mapboxgl.Map) => {
   map.getStyle().layers.forEach((l) => {
-    if (l.type == "symbol") {
+    if (l.type === "symbol") {
       map.setLayoutProperty(l.id, "visibility", "none");
     }
   });
