@@ -2,6 +2,7 @@
   "name": "mapbox-uk-boundaries",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://oliverbenns.github.io/mapbox-uk-boundaries",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
