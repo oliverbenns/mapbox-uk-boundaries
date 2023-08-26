@@ -45,7 +45,7 @@ function App() {
       removeLabels(map.current);
 
       (async () => {
-        const res = await fetch("./boundaries.geojson");
+        const res = await fetch(`${process.env.PUBLIC_URL}/boundaries.geojson`);
         const data = (await res.json()) as BoundaryData;
         console.log("data", data);
 
@@ -69,6 +69,15 @@ function App() {
 
   return (
     <div>
+      <header>
+        <h1>Mapbox UK Boundaries</h1>
+        <a
+          href="https://github.com/oliverbenns/mapbox-uk-boundaries"
+          target="_blank"
+        >
+          View on Github
+        </a>
+      </header>
       <main>
         <div ref={mapContainer} className="map" />
       </main>

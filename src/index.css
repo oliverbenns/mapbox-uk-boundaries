@@ -24,3 +24,20 @@ main {
   padding: 8px;
   font-size: 10px;
 }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rbga(255, 255, 255, 0.8);
+  padding: 8px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+header a {
+  font-size: 0.8rem;
+}
