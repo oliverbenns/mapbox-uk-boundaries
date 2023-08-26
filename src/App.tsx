@@ -3,6 +3,14 @@ import mapboxgl from "mapbox-gl";
 import proj4 from "proj4";
 import { FeatureCollection, Polygon } from "geojson";
 
+// https://github.com/visgl/react-map-gl/issues/1266
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import MapboxWorker from "worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker";
+
+// @ts-ignore
+mapboxgl.workerClass = MapboxWorker;
+
 interface CountyProperties {
   GlobalID: string;
   OBJECTID: number;
