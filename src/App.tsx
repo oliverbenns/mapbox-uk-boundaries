@@ -20,6 +20,12 @@ function App() {
         name: "mercator",
       },
     });
+
+    (async () => {
+      const res = await fetch("./boundaries.geojson");
+      const data = await res.json();
+      console.log("data", data);
+    })();
   });
 
   return (
