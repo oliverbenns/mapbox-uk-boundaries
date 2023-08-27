@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Data source: [ONS Open Geography portal](https://geoportal.statistics.gov.uk/datasets/bbf13c40ca8f4931afc0a46d079af58c/explore)
 
+View the project here: [oliverbenns.github.io/mapbox-uk-boundaries](https://oliverbenns.github.io/mapbox-uk-boundaries)
+
 ## Getting started
 
 - `cp .env.example.local .env.local`
